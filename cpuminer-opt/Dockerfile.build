@@ -1,0 +1,10 @@
+FROM		ubuntu:14.04
+
+RUN groupadd -g 2000 miner && \
+    useradd -u 2000 -g miner -m -s /bin/bash miner && \
+    echo 'miner:miner' | chpasswd
+RUN apt-get update -qq && apt-get install -qy automake autoconf pkg-config libcurl4-openssl-dev libssl-dev libjansson-dev libgmp-dev make g++ git && rm -rf /var/lib/apt/lists/*
+
+USER miner
+RUN cd && git clone https://github.com/JayDDee/cpuminer-opt.git build && cd ~/build && git checkout tags/v3.8.8.1 && ./build.sh && cp ~/build/cpuminer ~/cpuminer && rm -rf ~/build
+#ENTRYPOINT ["/home/miner/ccminer"]
