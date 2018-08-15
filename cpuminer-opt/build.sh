@@ -10,4 +10,4 @@ docker container rm -f extract
 echo Building viatoro/cpuminer-opt:latest
 
 docker build --no-cache -t viatoro/cpuminer-opt:latest .
-#rm ./ccminer
+rm ./ccminer
